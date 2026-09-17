@@ -1,0 +1,24 @@
+{% if showContactCta and contactEmail %}
+    <section class="contact-cta">
+        <div class="contact-cta__content">
+            <h2>{{ contactHeadline|default('Lass uns in Kontakt treten') }}</h2>
+
+            {% if contactText %}
+                <div class="contact-cta__text">
+                    {{ contactText|raw }}
+                </div>
+            {% endif %}
+        </div>
+
+        <a
+            class="contact-cta__button"
+            href="mailto:{{ contactEmail|e('url') }}"
+        >
+            <span>{{ contactButtonLabel|default('E-Mail schreiben') }}</span>
+
+            <span class="contact-cta__icon" aria-hidden="true">
+                <i class="ph-bold ph-envelope-simple"></i>
+            </span>
+        </a>
+    </section>
+{% endif %}

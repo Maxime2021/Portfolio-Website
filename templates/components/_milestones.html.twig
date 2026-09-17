@@ -1,0 +1,53 @@
+{% if showMilestones %}
+    <section class="milestones-section">
+        <h2>Meilensteine</h2>
+
+        <ol class="milestones">
+            {% for milestone in milestones %}
+                <li class="milestone">
+                    <span class="milestone__number">
+                        {{ loop.index }}
+                    </span>
+
+                    <div class="milestone__content">
+                        {% if milestone.date is defined and milestone.date %}
+                            <time
+                                class="milestone__date"
+                                datetime="{{ milestone.date|date('Y-m-d') }}"
+                            >
+                                {{ milestone.date|date('Y') }}
+                            </time>
+
+                        {% elseif milestone.year is defined and milestone.year %}
+                            {# Unterstützung für alte, bereits gespeicherte Inhalte #}
+                            <span class="milestone__date">
+                                {{ milestone.year }}
+                            </span>
+                        {% endif %}
+
+                        <p class="milestone__text">
+                            {{ milestone.text|nl2br }}
+                        </p>
+
+                        {% if loop.first %}
+                            <span class="milestone__label">
+                                Startpunkt
+                            </span>
+                        {% endif %}
+
+                        {% if loop.last %}
+                            <span class="milestone__label">
+                                Aktueller Stand
+                            </span>
+                        {% endif %}
+                    </div>
+                </li>
+
+            {% else %}
+                <li class="milestone milestone--empty">
+                    Noch keine Meilensteine hinterlegt.
+                </li>
+            {% endfor %}
+        </ol>
+    </section>
+{% endif %}

@@ -1,0 +1,34 @@
+{% if showSkills %}
+    <section class="skills-section">
+        <h2>Fähigkeiten &amp; Technologien</h2>
+
+        <p class="skills-section__count">
+            {{ skills|length }} Skills
+        </p>
+
+        <div class="skills-grid">
+            {% for skill in skills %}
+                <article class="skill-chip skill-chip--{{ skill.category ?? 'default' }}">
+                    <span class="skill-chip__number">
+                        {{ loop.index }}
+                    </span>
+
+                    <span class="skill-chip__name">
+                        {{ skill.name }}
+                    </span>
+
+                    {% if skill.level is defined and skill.level %}
+                        <span class="skill-chip__level">
+                            {{ skill.level }}
+                        </span>
+                    {% endif %}
+                </article>
+
+            {% else %}
+                <p class="skills-grid__empty">
+                    Noch keine Skills hinterlegt.
+                </p>
+            {% endfor %}
+        </div>
+    </section>
+{% endif %}

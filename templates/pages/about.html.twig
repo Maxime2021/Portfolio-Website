@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block style %}
+    {# Dein bestehendes Stylesheet laden #}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="about-page">
+
+        {# NEU:
+           Bild, Titel, Bio und optionaler Link sind nun in einem gemeinsamen
+           Einstiegsbereich. Dadurch können Bild und Text ab Tablet-Breite
+           nebeneinander dargestellt werden. #}
+        <section class="about-intro">
+
+            {# Dein bestehender Code für die Sulu-Bildauswahl #}
+            {% if content.profileImage %}
+                {% set image = sulu_resolve_media(content.profileImage, app.request.locale) %}
+
+                {% if image %}
+                    {# NEU: Wrapper-Klasse für das responsive Layout #}
+                    <div class="about-intro__image">
+                        <img
+                            src="{{ image.thumbnails['800x'] ?? image.url }}"
+                            alt="{{ image.title }}"
+                            class="profile-image"
+                        >
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {# NEU: Textbereich neben bzw. unter dem Bild #}
+            <div class="about-intro__content">
+                <h1>{{ content.title }}</h1>
+
+                {% if content.bio %}
+                    <div class="bio-text">
+                        {{ content.bio|raw }}
+                    </div>
+                {% endif %}
+
+                {# NEU:
+                   Funktioniert nur, wenn du profileUrl in about.xml ergänzt hast.
+                   Ohne gepflegten Link wird nichts angezeigt. #}
+                {% if content.profileUrl %}
+                    <a
+                        class="about-intro__link"
+                        href="{{ content.profileUrl }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Mehr erfahren
+                    </a>
+                {% endif %}
+            </div>
+        </section>
+        {# NEU: zusätzliches, optionales Bild #}
+        {% if content.aboutImage is defined and content.aboutImage %}
+            {% set aboutImage = sulu_resolve_media(content.aboutImage, app.request.locale) %}
+
+            {% if aboutImage %}
+                <figure class="about-detail-image">
+                    <img
+                        src="{{ aboutImage.thumbnails['800x'] ?? aboutImage.url }}"
+                        alt="{{ content.aboutImageAlt|default(aboutImage.title) }}"
+                    >
+                </figure>
+            {% endif %}
+        {% endif %}
+
+        {# GEÄNDERT:
+           Der bisherige vollständige Meilenstein-Code wurde ausgelagert.
+           Die Komponente erhält nur die Daten, die sie wirklich benötigt. #}
+        {% include 'components/_milestones.html.twig' with {
+            showMilestones: content.showMilestones|default(false),
+            milestones: content.milestones|default([])
+        } only %}
+
+        {# GEÄNDERT:
+           Der bisherige vollständige Skills-Code wurde ebenfalls ausgelagert. #}
+        {% include 'components/_skills.html.twig' with {
+            showSkills: content.showSkills|default(false),
+            skills: content.skills|default([])
+        } only %}
+
+        {% include 'components/_contact-cta.html.twig' with {
+    showContactCta: content.showContactCta|default(false),
+    contactHeadline: content.contactHeadline|default(''),
+    contactText: content.contactText|default(''),
+    contactEmail: content.contactEmail|default(''),
+    contactButtonLabel: content.contactButtonLabel|default('')
+} only %}
+
+    </div>
+{% endblock %}

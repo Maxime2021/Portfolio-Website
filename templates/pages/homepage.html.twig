@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block style  %}
+	<link rel="stylesheet" href="/css/style.css">
+{% endblock %}
+
+{% block content %}
+	<h1>{{ content.title }}</h1>
+	{% if content.subtitle %}
+		<p>
+			<em>{{ content.subtitle }}</em>
+		</p>
+	{% endif %}
+	{% if content.authorName %}
+		<p>
+			<em>{{ content.authorName }}</em>
+		</p>
+	{% endif %}
+
+    {% if content.features %}
+    <ul>
+        {% for feature in content.features %}
+            <li>
+                <h3>{{ feature.featureTitle }}</h3>
+                <p>{{ feature.featureText }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+	{{ content.article|raw }}
+{% endblock %}

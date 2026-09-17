@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns="http://schemas.sulu.io/template/template"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>about</key>
+    <view>pages/about</view>
+    <controller>Sulu\Content\UserInterface\Controller\Website\ContentController::indexAction</controller>
+    <cacheLifetime>86400</cacheLifetime>
+
+    <meta>
+        <title lang="en">About Me</title>
+        <title lang="de">Über mich</title>
+    </meta>
+
+    <properties>
+        <!-- 1. Titel (Standard Sulu-Pflichtfeld) -->
+        <property name="title" type="text_line" mandatory="true">
+            <meta>
+                <title lang="en">Title</title>
+                <title lang="de">Titel</title>
+            </meta>
+            <tag name="sulu.rlp.part" />
+        </property>
+
+        <!-- 2. Resource Locator / URL (Standard Sulu-Pflichtfeld) -->
+        <property name="url" type="route" mandatory="true">
+            <meta>
+                <title lang="en">Resourcelocator</title>
+                <title lang="de">Adresse</title>
+            </meta>
+            <tag name="sulu.rlp" />
+        </property>
+
+        <!-- 3. Profilbild -->
+        <property name="profileImage" type="single_media_selection">
+            <meta>
+                <title lang="en">Profile Image</title>
+                <title lang="de">Profilbild</title>
+            </meta>
+        </property>
+
+        <property name="aboutImage" type="single_media_selection">
+            <meta>
+                <title lang="en">Additional Image</title>
+                <title lang="de">Zusätzliches Bild</title>
+            </meta>
+
+    <params>
+                <param name="types" value="image" />
+            </params>
+        </property>
+
+        <property name="aboutImageAlt" type="text_line">
+            <meta>
+                <title lang="en">Image description</title>
+                <title lang="de">Bildbeschreibung</title>
+                <info_text lang="de">
+            Beschreibe kurz, was auf dem Bild zu sehen ist.
+        </info_text>
+            </meta>
+        </property>
+
+        <!-- 4. Über-mich-Text (Bio) -->
+        <property name="bio" type="text_editor">
+            <meta>
+                <title lang="en">About Text</title>
+                <title lang="de">Über-mich-Text</title>
+            </meta>
+        </property>
+        <property name="profileUrl" type="url">
+            <meta>
+                <title lang="en">External profile URL</title>
+                <title lang="de">Externer Profil-Link</title>
+                <info_text lang="de">
+            Zum Beispiel LinkedIn, GitHub oder eine externe Portfolioseite.
+        </info_text>
+            </meta>
+        </property>
+        <!-- 5. Meilensteine (Block-Element) -->
+        <property name="milestones" type="block">
+            <meta>
+                <title lang="en">Milestones</title>
+                <title lang="de">Meilensteine</title>
+            </meta>
+            <types>
+                <type name="milestone">
+                    <meta>
+                        <title lang="en">Milestone</title>
+                        <title lang="de">Meilenstein</title>
+                    </meta>
+                    <properties>
+                        <property name="year" type="text_area" mandatory="true">
+                            <meta>
+                                <title lang="en">Date</title>
+                                <title lang="de">Datum</title>
+                            </meta>
+                        </property>
+                        <property name="text" type="text_line" mandatory="true">
+                            <meta>
+                                <title lang="en">Description</title>
+                                <title lang="de">Beschreibung</title>
+                            </meta>
+                        </property>
+
+
+                    </properties>
+                </type>
+            </types>
+        </property>
+
+        <!-- 6. Checkbox: Meilensteine anzeigen -->
+        <property name="showMilestones" type="checkbox">
+            <meta>
+                <title lang="en">Show Milestones</title>
+                <title lang="de">Meilensteine anzeigen</title>
+            </meta>
+        </property>
+
+        <!-- 7. Skills / Fähigkeiten (Block-Element) -->
+        <property name="skills" type="block">
+            <meta>
+                <title lang="en">Skills</title>
+                <title lang="de">Fähigkeiten</title>
+            </meta>
+            <types>
+                <type name="skill">
+                    <meta>
+                        <title lang="en">Skill</title>
+                        <title lang="de">Fähigkeit</title>
+                    </meta>
+                    <properties>
+                        <property name="name" type="text_line" mandatory="true">
+                            <meta>
+                                <title lang="en">Name</title>
+                                <title lang="de">Technologie / Skill</title>
+                            </meta>
+                        </property>
+                        <property name="category" type="single_select">
+                            <meta>
+                                <title lang="en">Category</title>
+                                <title lang="de">Kategorie</title>
+                            </meta>
+                            <params>
+                                <param name="values" type="collection">
+                                    <param name="software">
+                                        <meta>
+                                            <title lang="de">Software &amp; Web</title>
+                                        </meta>
+                                    </param>
+                                    <param name="hardware">
+                                        <meta>
+                                            <title lang="de">Elektronik &amp; Hardware</title>
+                                        </meta>
+                                    </param>
+                                </param>
+                            </params>
+                        </property>
+
+                        <property name="level" type="single_select">
+                            <meta>
+                                <title lang="en">Experience level</title>
+                                <title lang="de">Kenntnisstand</title>
+                            </meta>
+
+    <params>
+                                <param name="values" type="collection">
+                                    <param name="basic">
+                                        <meta>
+                                            <title lang="de">Grundkenntnisse</title>
+                                        </meta>
+                                    </param>
+                                    <param name="advanced">
+                                        <meta>
+                                            <title lang="de">Fortgeschritten</title>
+                                        </meta>
+                                    </param>
+                                    <param name="expert">
+                                        <meta>
+                                            <title lang="de">Sehr erfahren</title>
+                                        </meta>
+                                    </param>
+                                </param>
+                            </params>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </property>
+
+        <!-- 8. Checkbox: Skills anzeigen -->
+        <property name="showSkills" type="checkbox">
+            <meta>
+                <title lang="en">Show Skills</title>
+                <title lang="de">Fähigkeiten anzeigen</title>
+            </meta>
+        </property>
+
+        <!-- Kontakt-Call-to-Action -->
+        <property name="showContactCta" type="checkbox">
+            <meta>
+                <title lang="en">Show contact section</title>
+                <title lang="de">Kontaktbereich anzeigen</title>
+            </meta>
+        </property>
+
+        <property name="contactHeadline" type="text_line">
+            <meta>
+                <title lang="en">Contact headline</title>
+                <title lang="de">Kontakt-Überschrift</title>
+            </meta>
+        </property>
+
+        <property name="contactText" type="text_editor">
+            <meta>
+                <title lang="en">Contact text</title>
+                <title lang="de">Kontakt-Text</title>
+            </meta>
+        </property>
+
+        <property name="contactEmail" type="text_line">
+            <meta>
+                <title lang="en">Email address</title>
+                <title lang="de">E-Mail-Adresse</title>
+            </meta>
+        </property>
+
+        <property name="contactButtonLabel" type="text_line">
+            <meta>
+                <title lang="en">Button label</title>
+                <title lang="de">Beschriftung des Buttons</title>
+            </meta>
+        </property>
+
+    </properties>
+</template>

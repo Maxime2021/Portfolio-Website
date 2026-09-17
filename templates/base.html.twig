@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {# 
+       Unverändert:
+       Dieser Include erzeugt unter anderem <title>, Meta-Description
+       und weitere SEO-Metadaten aus den Sulu-Seiteneinstellungen.
+    #}
+
+        {% block meta %}
+            {{ include('@SuluWebsite/Extension/seo.html.twig', {
+            seo: extension.seo|default([]),
+            content: content|default([]),
+            localizations: localizations|default([]),
+            shadowBaseLocale: shadowBaseLocale|default(),
+        }) }}
+        {% endblock %}
+        {# NEU: Phosphor Icons – nur die verwendete „bold“-Variante laden #}
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"
+        >
+        {% block style %}{% endblock %}
+    </head>
+    <body>
+        <header class="site-header">
+            {% block header %}
+                <div class="container site-header__inner">
+                    <a class="site-logo" href="{{ sulu_content_root_path() }}">
+                        Portfolio
+                    </a>
+
+                    <button
+                        class="nav-toggle"
+                        type="button"
+                        aria-controls="primary-navigation"
+                        aria-expanded="false"
+                    >
+                        <span class="visually-hidden">Menü öffnen</span>
+                        <span class="nav-toggle__line"></span>
+                        <span class="nav-toggle__line"></span>
+                        <span class="nav-toggle__line"></span>
+                    </button>
+
+                    <nav
+                        id="primary-navigation"
+                        class="site-nav"
+                        aria-label="Hauptnavigation"
+                    >
+                        <ul>
+                            <li>
+                                <a href="{{ sulu_content_root_path() }}">Homepage</a>
+                            </li>
+
+                            {% for item in sulu_page_navigation_root_tree('main', 1, {
+                    title: 'title',
+                    url: 'url',
+                }) %}
+                                <li>
+                                    <a href="{{ sulu_content_path(item.url) }}">
+                                        {{ item.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            {% endblock %}
+        </header>
+
+        {#
+    <form action="{{ path('sulu_search.website_search') }}" method="GET">
+        <input name="q" type="text" placeholder="Search"/>
+        <input type="submit" value="Go"/>
+    </form>
+    #}
+        {# GEÄNDERT: Klassen für das spätere CSS ergänzt #}
+        <main class="site-main">
+            {% block content %}{% endblock %}
+        </main>
+
+    
+
+        <footer class="site-footer">
+            {% block footer %}
+                {% set footerSnippet = sulu_snippet_load_by_area('footer') %}
+
+                <div class="container footer__content">
+                    <div class="footer__information">
+                        {% if footerSnippet %}
+                            {% if footerSnippet.content.copyright is defined %}
+                                <p>{{ footerSnippet.content.copyright }}</p>
+                            {% endif %}
+
+                            {% if footerSnippet.content.text is defined %}
+                                <div>{{ footerSnippet.content.text|raw }}</div>
+                            {% endif %}
+                        {% else %}
+                            <p>&copy; {{ 'now'|date('Y') }} Amedée Kreuzer</p>
+                        {% endif %}
+                    </div>
+
+                    {# NEU: Social-Media-Links #}
+                    <nav class="footer__socials" aria-label="Social Media">
+                        <a
+                            class="social-link"
+                            href="https://www.linkedin.com/in/DEIN-PROFIL"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn-Profil öffnen"
+                        >
+                            <span class="social-link__icon" aria-hidden="true">
+                                <i class="ph-bold ph-linkedin-logo"></i>
+                            </span>
+                            <span class="visually-hidden">LinkedIn</span>
+                        </a>
+
+                        <a
+                            class="social-link"
+                            href="https://github.com/Maxime2021"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitHub-Profil öffnen"
+                        >
+                            <span class="social-link__icon" aria-hidden="true">
+                                <i class="ph-bold ph-github-logo"></i>
+                            </span>
+                            <span class="visually-hidden">GitHub</span>
+                        </a>
+                    </nav>
+                </div>
+            {% endblock %}
+        </footer>
+
+
+        <script src="{{ asset('js/navigation.js') }}" defer></script>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
