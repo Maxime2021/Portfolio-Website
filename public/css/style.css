@@ -19,6 +19,8 @@
     --color-border: #d9e2ec;
     --color-shadow: rgb(16 42 67 / 14%);
 
+    --color-accent:#ffffff;
+
     /* Layout */
     --content-width: 800px;
     --radius-small: 6px;
@@ -108,13 +110,22 @@ h2 {
     justify-content: space-between;
     min-height: 4.5rem;
 }
-
 .site-logo {
-    color: #ffffff;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--color-accent);
     text-decoration: none;
+}
+
+.site-logo__mark {
+    width: 2.625rem;
+    height: 2.625rem;
+}
+
+.site-logo__text {
+    color: inherit;
+    font-weight: 700;
 }
 
 .nav-toggle {
