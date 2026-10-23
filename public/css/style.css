@@ -270,6 +270,14 @@ h2 {
     box-shadow: 0 8px 24px var(--color-shadow);
 }
 
+ .about-intro__lead {
+       margin: 0 0 var(--space-sm);
+       color: var(--color-heading);
+       font-size: 1.25rem;
+       font-weight: 500;
+       line-height: 1.5;
+   }
+
 .about-intro {
     display: grid;
     gap: var(--space-lg);

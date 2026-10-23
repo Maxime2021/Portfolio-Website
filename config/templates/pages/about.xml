@@ -61,6 +61,13 @@
             </meta>
         </property>
 
+        <property name="intro" type="text_area">
+            <meta>
+                <title lang="de">Kurzvorstellung</title>
+                <title lang="en">Intro</title>
+            </meta>
+        </property>
+
         <!-- 4. Über-mich-Text (Bio) -->
         <property name="bio" type="text_editor">
             <meta>

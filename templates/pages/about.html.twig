@@ -34,6 +34,9 @@
             <div class="about-intro__content">
                 <h1>{{ content.title }}</h1>
 
+                    {%  if content.intro  %}
+                        <p class="about-intro_lead">{{ content.intro }}</p>
+                    {%  endif %}
                 {% if content.bio %}
                     <div class="bio-text">
                         {{ content.bio|raw }}
