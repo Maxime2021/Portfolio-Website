@@ -35,12 +35,16 @@
                 <h1>{{ content.title }}</h1>
 
                     {%  if content.intro  %}
-                        <p class="about-intro_lead">{{ content.intro }}</p>
+                        <p class="about-intro__lead">{{ content.intro }}</p>
                     {%  endif %}
                 {% if content.bio %}
-                    <div class="bio-text">
-                        {{ content.bio|raw }}
-                    </div>
+                    <details class="bio-toggle">
+                        <summary class="bio-toggle__button">Mehr über mich</summary>
+                        
+                        <div class="bio-text">
+                                {{ content.bio|raw }}
+                        </div>
+                    </details>
                 {% endif %}
 
                 {# NEU:

@@ -19,7 +19,7 @@
     --color-border: #d9e2ec;
     --color-shadow: rgb(16 42 67 / 14%);
 
-    --color-accent:#ffffff;
+    --color-accent: #ffffff;
 
     /* Layout */
     --content-width: 800px;
@@ -110,6 +110,7 @@ h2 {
     justify-content: space-between;
     min-height: 4.5rem;
 }
+
 .site-logo {
     display: inline-flex;
     align-items: center;
@@ -270,14 +271,6 @@ h2 {
     box-shadow: 0 8px 24px var(--color-shadow);
 }
 
- .about-intro__lead {
-       margin: 0 0 var(--space-sm);
-       color: var(--color-heading);
-       font-size: 1.25rem;
-       font-weight: 500;
-       line-height: 1.5;
-   }
-
 .about-intro {
     display: grid;
     gap: var(--space-lg);
@@ -306,6 +299,17 @@ h2 {
     margin-bottom: var(--space-sm);
 }
 
+
+.about-intro__lead {
+    margin: 0 0 var(--space-sm);
+    color: var(--color-heading);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+
+
 .bio-text {
     max-width: 65ch;
     color: var(--color-text-muted);
@@ -319,6 +323,47 @@ h2 {
 
 .bio-text p:last-child {
     margin-bottom: 0;
+}
+
+.bio-toggle {
+    margin-top: var(--space-sm);
+}
+
+/* Der Klick-Bereich */
+.bio-toggle__button {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: var(--color-brand);
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none; /* Standard-Dreieck ausblenden */
+}
+
+.bio-toggle__button::-webkit-details-marker {
+    display: none; /* Dreieck in Safari ausblenden */
+}
+
+/* Eigener Pfeil, der sich beim Öffnen dreht */
+.bio-toggle__button::after {
+    content: "▾";
+    transition: transform 0.2s ease;
+}
+
+.bio-toggle[open] .bio-toggle__button::after {
+    transform: rotate(180deg);
+}
+
+.bio-toggle__button:hover,
+.bio-toggle__button:focus-visible {
+    color: var(--color-brand-dark);
+    outline: none;
+    text-decoration: underline;
+}
+
+/* Abstand zwischen Button und aufgeklapptem Text */
+.bio-toggle[open] .bio-text {
+    margin-top: var(--space-sm);
 }
 
 .about-intro__link {
