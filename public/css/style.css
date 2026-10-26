@@ -65,6 +65,20 @@ a {
     color: inherit;
 }
 
+/* Glossary terms linked by the glossary_links Twig filter */
+.glossary-link {
+    color: var(--color-brand);
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+}
+
+.glossary-link:hover,
+.glossary-link:focus-visible {
+    color: var(--color-brand-dark);
+    text-decoration-style: solid;
+}
+
+
 .container,
 .site-main,
 main {
